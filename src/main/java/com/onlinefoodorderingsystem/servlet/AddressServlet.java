@@ -1,4 +1,4 @@
-package java.com.onlinefoodorderingsystem.servlet;
+package src.main.java.com.onlinefoodorderingsystem.servlet;
 
 import com.onlinefoodorderingsystem.model.Address;
 import com.onlinefoodorderingsystem.service.AddressService;

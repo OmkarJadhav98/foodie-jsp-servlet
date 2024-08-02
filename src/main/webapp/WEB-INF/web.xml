@@ -4,6 +4,42 @@
          version="4.0">
 
     <servlet>
+        <servlet-name>AddressServlet</servlet-name>
+        <servlet-class>com.onlinefoodorderingsystem.servlet.AddressServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddressServlet</servlet-name>
+        <url-pattern>/address</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ContactServlet</servlet-name>
+        <servlet-class>com.onlinefoodorderingsystem.servlet.ContactServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ContactServlet</servlet-name>
+        <url-pattern>/contact</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CustomerServlet</servlet-name>
+        <servlet-class>com.onlinefoodorderingsystem.servlet.CustomerServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CustomerServlet</servlet-name>
+        <url-pattern>/customer</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DeliveryExecutiveServlet</servlet-name>
+        <servlet-class>com.onlinefoodorderingsystem.servlet.DeliveryExecutiveServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeliveryExecutiveServlet</servlet-name>
+        <url-pattern>/deliveryExecutive</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>IndexServlet</servlet-name>
         <servlet-class>com.onlinefoodorderingsystem.servlet.IndexServlet</servlet-class>
     </servlet>
@@ -13,15 +49,39 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>AddressServlet</servlet-name>
-        <servlet-class>com.onlinefoodorderingsystem.servlet.AddressServlet</servlet-class>
+        <servlet-name>KartServlet</servlet-name>
+        <servlet-class>com.onlinefoodorderingsystem.servlet.KartServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>AddressServlet</servlet-name>
-        <url-pattern>/address</url-pattern>
+        <servlet-name>KartServlet</servlet-name>
+        <url-pattern>kart</url-pattern>
     </servlet-mapping>
 
-    <!-- Repeat for each servlet -->
-    <!-- ... -->
+    <servlet>
+        <servlet-name>MenuServlet</servlet-name>
+        <servlet-class>com.onlinefoodorderingsystem.servlet.MenuServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MenuServlet</servlet-name>
+        <url-pattern>Menu</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>OrderServlet</servlet-name>
+        <servlet-class>com.onlinefoodorderingsystem.servlet.OrderServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>OrderServlet</servlet-name>
+        <url-pattern>order</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>RestaurantServlet</servlet-name>
+        <servlet-class>com.onlinefoodorderingsystem.servlet.RestaurantServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RestaurantServlet</servlet-name>
+        <url-pattern>Restaurant</url-pattern>
+    </servlet-mapping>
 
 </web-app>

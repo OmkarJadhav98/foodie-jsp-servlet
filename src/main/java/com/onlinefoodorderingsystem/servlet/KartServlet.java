@@ -55,11 +55,30 @@ public class KartServlet extends HttpServlet {
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // Implement update logic
+        String action = req.getParameter("action");
+        if ("updateKart".equals(action)) {
+            long kartId = Long.parseLong(req.getParameter("id"));
+            long customerId = Long.parseLong(req.getParameter("customerId"));
+
+            Kart kart = new Kart(kartId, customerId);
+            kartService.updateKart(kart);
+            resp.setContentType("application/json");
+            resp.getWriter().write("{\"message\":\"Kart updated successfully\"}");
+        } else {
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid action");
+        }
     }
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // Implement delete logic
+        String action = req.getParameter("action");
+        if ("deleteKart".equals(action)) {
+            long kartId = Long.parseLong(req.getParameter("id"));
+            kartService.deleteKart(kartId);
+            resp.setContentType("application/json");
+            resp.getWriter().write("{\"message\":\"Kart deleted successfully\"}");
+        } else {
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid action");
+        }
     }
 }

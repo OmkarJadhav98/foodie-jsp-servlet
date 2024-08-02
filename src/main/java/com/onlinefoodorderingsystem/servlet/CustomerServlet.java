@@ -57,11 +57,32 @@ public class CustomerServlet extends HttpServlet {
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // Implement update logic
+        String action = req.getParameter("action");
+        if ("updateCustomer".equals(action)) {
+            long customerId = Long.parseLong(req.getParameter("id"));
+            String name = req.getParameter("name");
+            String email = req.getParameter("email");
+            String password = req.getParameter("password");
+
+            Customer customer = new Customer(customerId, name, email, password);
+            customerService.updateCustomer(customer);
+            resp.setContentType("application/json");
+            resp.getWriter().write("{\"message\":\"Customer updated successfully\"}");
+        } else {
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid action");
+        }
     }
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // Implement delete logic
+        String action = req.getParameter("action");
+        if ("deleteCustomer".equals(action)) {
+            long customerId = Long.parseLong(req.getParameter("id"));
+            customerService.deleteCustomer(customerId);
+            resp.setContentType("application/json");
+            resp.getWriter().write("{\"message\":\"Customer deleted successfully\"}");
+        } else {
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid action");
+        }
     }
 }

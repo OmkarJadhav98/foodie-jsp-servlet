@@ -56,11 +56,31 @@ public class DeliveryExecutiveServlet extends HttpServlet {
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // Implement update logic
+        String action = req.getParameter("action");
+        if ("updateDeliveryExecutive".equals(action)) {
+            long deliveryExecutiveId = Long.parseLong(req.getParameter("id"));
+            String name = req.getParameter("name");
+            String phone = req.getParameter("phone");
+
+            DeliveryExecutive deliveryExecutive = new DeliveryExecutive(deliveryExecutiveId, name, phone);
+            deliveryExecutiveService.updateDeliveryExecutive(deliveryExecutive);
+            resp.setContentType("application/json");
+            resp.getWriter().write("{\"message\":\"Delivery Executive updated successfully\"}");
+        } else {
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid action");
+        }
     }
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // Implement delete logic
+        String action = req.getParameter("action");
+        if ("deleteDeliveryExecutive".equals(action)) {
+            long deliveryExecutiveId = Long.parseLong(req.getParameter("id"));
+            deliveryExecutiveService.deleteDeliveryExecutive(deliveryExecutiveId);
+            resp.setContentType("application/json");
+            resp.getWriter().write("{\"message\":\"Delivery Executive deleted successfully\"}");
+        } else {
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid action");
+        }
     }
 }

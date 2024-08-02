@@ -65,11 +65,36 @@ public class ContactServlet extends HttpServlet {
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // Implement update logic
+        String action = req.getParameter("action");
+        if ("updateContact".equals(action)) {
+            long contactId = Long.parseLong(req.getParameter("id"));
+            long phone = Long.parseLong(req.getParameter("phone"));
+            long addressId = Long.parseLong(req.getParameter("addressId"));
+            Address address = addressService.getAddressById(addressId);
+
+            if (address != null) {
+                Contact contact = new Contact(contactId, phone, address);
+                contactService.updateContact(contact);
+                resp.setContentType("application/json");
+                resp.getWriter().write("{\"message\":\"Contact updated successfully\"}");
+            } else {
+                resp.sendError(HttpServletResponse.SC_NOT_FOUND, "Address not found");
+            }
+        } else {
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid action");
+        }
     }
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // Implement delete logic
+        String action = req.getParameter("action");
+        if ("deleteContact".equals(action)) {
+            long contactId = Long.parseLong(req.getParameter("id"));
+            contactService.deleteContact(contactId);
+            resp.setContentType("application/json");
+            resp.getWriter().write("{\"message\":\"Contact deleted successfully\"}");
+        } else {
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid action");
+        }
     }
 }

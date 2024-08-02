@@ -56,11 +56,31 @@ public class RestaurantServlet extends HttpServlet {
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // Implement update logic
+        String action = req.getParameter("action");
+        if ("updateRestaurant".equals(action)) {
+            long id = Long.parseLong(req.getParameter("id"));
+            String name = req.getParameter("name");
+            String address = req.getParameter("address");
+
+            Restaurant restaurant = new Restaurant(id, name, address);
+            restaurantService.updateRestaurant(restaurant);
+            resp.setContentType("application/json");
+            resp.getWriter().write("{\"message\":\"Restaurant updated successfully\"}");
+        } else {
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid action");
+        }
     }
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // Implement delete logic
+        String action = req.getParameter("action");
+        if ("deleteRestaurant".equals(action)) {
+            long id = Long.parseLong(req.getParameter("id"));
+            restaurantService.deleteRestaurant(id);
+            resp.setContentType("application/json");
+            resp.getWriter().write("{\"message\":\"Restaurant deleted successfully\"}");
+        } else {
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid action");
+        }
     }
 }

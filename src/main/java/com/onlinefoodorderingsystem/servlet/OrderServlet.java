@@ -57,11 +57,32 @@ public class OrderServlet extends HttpServlet {
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // Implement update logic
+        String action = req.getParameter("action");
+        if ("updateOrder".equals(action)) {
+            long orderId = Long.parseLong(req.getParameter("id"));
+            long customerId = Long.parseLong(req.getParameter("customerId"));
+            long restaurantId = Long.parseLong(req.getParameter("restaurantId"));
+            double totalAmount = Double.parseDouble(req.getParameter("totalAmount"));
+
+            Order order = new Order(orderId, customerId, restaurantId, totalAmount);
+            orderService.updateOrder(order);
+            resp.setContentType("application/json");
+            resp.getWriter().write("{\"message\":\"Order updated successfully\"}");
+        } else {
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid action");
+        }
     }
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // Implement delete logic
+        String action = req.getParameter("action");
+        if ("deleteOrder".equals(action)) {
+            long orderId = Long.parseLong(req.getParameter("id"));
+            orderService.deleteOrder(orderId);
+            resp.setContentType("application/json");
+            resp.getWriter().write("{\"message\":\"Order deleted successfully\"}");
+        } else {
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid action");
+        }
     }
 }

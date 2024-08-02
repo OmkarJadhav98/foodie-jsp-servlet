@@ -57,11 +57,32 @@ public class MenuServlet extends HttpServlet {
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // Implement update logic
+        String action = req.getParameter("action");
+        if ("updateMenu".equals(action)) {
+            long menuId = Long.parseLong(req.getParameter("id"));
+            String name = req.getParameter("name");
+            double price = Double.parseDouble(req.getParameter("price"));
+            long restaurantId = Long.parseLong(req.getParameter("restaurantId"));
+
+            Menu menu = new Menu(menuId, name, price, restaurantId);
+            menuService.updateMenu(menu);
+            resp.setContentType("application/json");
+            resp.getWriter().write("{\"message\":\"Menu updated successfully\"}");
+        } else {
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid action");
+        }
     }
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // Implement delete logic
+        String action = req.getParameter("action");
+        if ("deleteMenu".equals(action)) {
+            long menuId = Long.parseLong(req.getParameter("id"));
+            menuService.deleteMenu(menuId);
+            resp.setContentType("application/json");
+            resp.getWriter().write("{\"message\":\"Menu deleted successfully\"}");
+        } else {
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid action");
+        }
     }
 }

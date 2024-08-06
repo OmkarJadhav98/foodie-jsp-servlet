@@ -12,7 +12,7 @@ import java.io.IOException;
 
 @WebServlet("/address")
 public class AddressServlet extends HttpServlet {
-    private AddressService addressService;
+    private AddressService ;
 
     @Override
     public void init() throws ServletException {

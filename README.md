@@ -1,1 +1,1 @@
-# foodie-jsp-servlet
+# yumcourt-jsp-servlet
